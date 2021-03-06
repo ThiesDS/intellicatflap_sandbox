@@ -1,20 +1,20 @@
-*.avi
-/data/*.mp4
-/data/*.h264
-/data/*.jpg
-/data/*.png
-/data/*.log
-/sandbox/output/*.avi
-/sandbox/output/*.mp4
-/sandbox/output/*.h264
-/sandbox/output/*.jpg
-/sandbox/output/*.png
+# Models
+*.pb
+*.pbtxt
+variables.*
+*.xml
+*.caffemodel
+*.prototxt
+checkpoint
+*.tflite
+*.h5
+*.weights
+
+# TF
+events.out.tfevents*
 
 # Logs
-/logs/*.log
-
-# Service Account
-*gcs_serviceaccount.json
+*.log
 
 # Mac Finder specific
 *.DS_Store
