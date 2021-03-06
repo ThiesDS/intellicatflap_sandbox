@@ -9,6 +9,7 @@ checkpoint
 *.tflite
 *.h5
 *.weights
+*.config
 
 # TF
 events.out.tfevents*
