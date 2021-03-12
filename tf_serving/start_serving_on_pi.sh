@@ -4,8 +4,6 @@ docker kill tfserving_mobilenet
 docker rm tfserving_mobilenet
 docker run -p 8501:8501 -p 8500:8500 \
     --name tfserving_mobilenet \
-    #--mount type=bind,source=$(pwd)/models/ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8/saved_model,target=/models/resnet/1/ \
-    #--mount type=bind,source=$(pwd)/tf_serving/config,target=/config/ \
     -v $(pwd)/models/ssd_mobilenet_v2_fpnlite_640x640_coco17_tpu-8/saved_model:/models/resnet/1/ \
     -v $(pwd)/tf_serving/config:/config/ \
     -d \
