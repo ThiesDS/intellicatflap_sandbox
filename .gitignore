@@ -22,3 +22,6 @@ events.out.tfevents*
 
 # Service accounts
 config/gcs_serviceaccount.json
+
+# cache
+__pycache__
