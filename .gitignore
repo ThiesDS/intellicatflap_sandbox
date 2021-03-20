@@ -19,3 +19,6 @@ events.out.tfevents*
 
 # Mac Finder specific
 *.DS_Store
+
+# Service accounts
+config/gcs_serviceaccount.json
