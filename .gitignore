@@ -25,3 +25,6 @@ config/gcs_serviceaccount.json
 
 # cache
 __pycache__
+
+# Data
+image_classification/data/*

@@ -1,6 +1,10 @@
-import aiohttp
 import cv2
+import json
+import aiohttp
+import asyncio
+
 import numpy as np
+
 from google.cloud import storage
 
 
@@ -42,17 +46,21 @@ async def fetch(session, url, data, headers):
         return resp
 
 
-async def fetch_all(image_paths):
+async def detect_cat(image_paths):
     async with aiohttp.ClientSession() as session:
         
         tasks = []
         for image_path in image_paths:
             image_np = cv2.imread(image_path).astype('uint8')
+            #image_np = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
+            #image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY)
+
             image_np = np.expand_dims(image_np, axis=0)
+            print(image_np.shape)
             image_list = image_np.tolist()
             
             headers = {"content-type": "application/json"}
-            url = 'http://localhost:8501/v1/models/resnet:predict'
+            url = 'http://localhost:8501/v1/models/mobilenet:predict'
             data = json.dumps({"signature_name": "serving_default", "instances": image_list})
             
             tasks.append(
