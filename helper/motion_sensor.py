@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import os
 
-base_dir = "/Users/administrator/private/intellicatflap_analytics/analysis/sample_data/calibration_sample/"
+base_dir = "/Users/administrator/private/intellicatflap_analytics/sample_data/calibration_sample_2/"
 files = os.listdir(base_dir)
 
 images = [img for img in files if img.endswith('.jpg')]
@@ -19,6 +19,7 @@ for i in range(1,len(images)):
     img_diff_12 = (img2-img1)**2
     img_diff_12_sum = np.sum(img_diff_12)/(img_diff_12.shape[0]*img_diff_12.shape[1])
 
+    print('Difference to image ' + images[i])
     print(img_diff_12_sum)
 
-# THRESHOLD: 10
+# THRESHOLD: 30
