@@ -28,3 +28,5 @@ __pycache__
 
 # Data
 image_classification/data/*
+sample_data/calibration_sample_2/*
+sample_data/mouse_samples/tmp*
