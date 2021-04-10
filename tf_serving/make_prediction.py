@@ -14,7 +14,7 @@ import numpy as np
 # USE conda env 
 
 # Detect objects
-image_dir = '/Users/administrator/private/intellicatflap_analytics/analysis/sample_data/calibration_sample/'
+image_dir = '/Users/administrator/private/intellicatflap_analytics/sample_data/calibration_sample/'
 
 files = os.listdir(image_dir)
 image_paths = [image_dir + img for img in files if img.endswith('.jpg')]
@@ -102,6 +102,7 @@ print("Warmup")
 start_time = time.time()
 responses = asyncio.run(fetch_all(image_paths[:3]))
 print(f"It took {time.time() - start_time}s to process {len(image_paths[:3])} images.")
+
 
 print(len(image_paths))
 print(image_paths[:3])

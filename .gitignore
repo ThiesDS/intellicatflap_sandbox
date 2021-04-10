@@ -9,6 +9,7 @@ checkpoint
 *.tflite
 *.h5
 *.weights
+*.config
 
 # TF
 events.out.tfevents*
@@ -18,3 +19,12 @@ events.out.tfevents*
 
 # Mac Finder specific
 *.DS_Store
+
+# Service accounts
+config/gcs_serviceaccount.json
+
+# cache
+__pycache__
+
+# Data
+image_classification/data/*
