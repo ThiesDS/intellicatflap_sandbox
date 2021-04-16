@@ -19,7 +19,8 @@ REQUEST_TYPE = 'sequential'
 
 
 # Detect objects
-image_dir = '/Users/administrator/private/intellicatflap_analytics/sample_data/calibration_sample/'
+cwd = os.getcwd()
+image_dir = cwd + '/sample_data/calibration_sample/'
 
 files = os.listdir(image_dir)
 image_paths = [image_dir + img for img in files if img.endswith('.jpg')]
