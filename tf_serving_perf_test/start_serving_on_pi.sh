@@ -8,7 +8,7 @@ docker run -p 8501:8501 -p 8500:8500 \
     -v $(pwd)/tf_serving/config:/config/ \
     -d \
     -e MODEL_NAME=mobilenet \
-    -e TF_CPP_MIN_VLOG_LEVEL=4 \
-    -t emacski/tensorflow-serving:2.4.1-linux_arm_armv7-a_neon_vfpv4 \
-    --enable_batching \
-    --batching_parameters_file=/config/batching_config.txt
+    #-e TF_CPP_MIN_VLOG_LEVEL=4 \
+    -t emacski/tensorflow-serving:2.4.1-linux_arm_armv7-a_neon_vfpv4 #\
+    #--enable_batching \
+    #--batching_parameters_file=/config/batching_config.txt
