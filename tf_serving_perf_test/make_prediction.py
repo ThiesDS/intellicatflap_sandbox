@@ -6,7 +6,8 @@ import time
 import aiohttp
 import asyncio
 import random
-import cv2
+#import cv2
+from PIL import Image
 
 import numpy as np
 
@@ -14,7 +15,7 @@ import numpy as np
 
 
 # Main spec
-REQUEST_TYPE = 'concurrent'
+REQUEST_TYPE = 'sequential'
 
 
 # Detect objects
@@ -33,8 +34,10 @@ if REQUEST_TYPE == 'sequential':
 
     for image_path in image_paths:
 
-        image_np = cv2.imread(image_path).astype('uint8')
+        #image_np = cv2.imread(image_path).astype('uint8')
+        image_np = Image.open(image_path)
         image_np = np.expand_dims(image_np, axis=0)
+        image_np = image_np.astype('uint8')
 
         data = json.dumps({"signature_name": "serving_default", "instances": image_np.tolist()})
         
