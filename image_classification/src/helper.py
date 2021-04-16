@@ -52,11 +52,7 @@ async def detect_cat(image_paths):
         tasks = []
         for image_path in image_paths:
             image_np = cv2.imread(image_path).astype('uint8')
-            #image_np = cv2.cvtColor(image_np, cv2.COLOR_BGR2RGB)
-            #image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2GRAY)
-
             image_np = np.expand_dims(image_np, axis=0)
-            print(image_np.shape)
             image_list = image_np.tolist()
             
             headers = {"content-type": "application/json"}
