@@ -15,7 +15,7 @@ import numpy as np
 
 
 # Main spec
-REQUEST_TYPE = 'sequential'
+REQUEST_TYPE = 'concurrent'
 
 
 # Detect objects
@@ -66,12 +66,12 @@ elif REQUEST_TYPE == 'concurrent':
             
             tasks = []
             for image_path in image_paths:
-                image_np = cv2.imread(image_path).astype('uint8')
+                image_np = Image.open(image_path)
                 image_np = np.expand_dims(image_np, axis=0)
-                image_list = image_np.tolist()
+                image_np = image_np.astype('uint8')
                 
                 url = 'http://localhost:8501/v1/models/mobilenet:predict'
-                data = json.dumps({"signature_name": "serving_default", "instances": image_list})
+                data = json.dumps({"signature_name": "serving_default", "instances": image_np.tolist()})
                 
                 tasks.append(
                     fetch(
