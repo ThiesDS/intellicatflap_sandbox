@@ -6,6 +6,8 @@ import asyncio
 import numpy as np
 
 from google.cloud import storage
+from keras.preprocessing.image import load_img
+from keras.preprocessing.image import img_to_array
 
 
 def download_blob(bucket_name, source_blob_path, destination_path, credentials):
@@ -22,8 +24,9 @@ def download_blob(bucket_name, source_blob_path, destination_path, credentials):
     
     # Iterate over blobs and download
     for blob in blobs:
-        file_name = blob.name.split('/')[-1]
+        file_name = '_'.join(blob.name.split('/')[1:])
         blob.download_to_filename(destination_path + file_name)
+        print('Downloaded ' + str(file_name))
 
     
 def upload_blob(bucket_name, source_file_name, destination_blob_name, credentials):
@@ -70,3 +73,16 @@ async def detect_cat(image_paths):
 
         responses = await asyncio.gather(*tasks, return_exceptions=True)
         return responses
+
+
+def load_image(filename):
+    # load the image
+    img = load_img(filename, target_size=(224, 224))
+    # convert to array
+    img = img_to_array(img)
+    # reshape into a single sample with 3 channels
+    img = img.reshape(1, 224, 224, 3)
+    # center pixel data
+    img = img.astype('float32')
+    img = img - [123.68, 116.779, 103.939]
+    return img

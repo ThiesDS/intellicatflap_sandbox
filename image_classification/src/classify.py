@@ -1,49 +1,37 @@
-import asyncio
 import time
 import json
+import requests
 
-from helper import detect_cat
+from helper import detect_cat,load_image
 
-def parallel_cat_detection(image_paths):
+def batch_classify_cat(local_path,images):
 
-    # TODO: Parallelize paths 
+    # Define request parameters
+    headers = {"content-type": "application/json"}
+    url = 'http://localhost:8501/v1/models/cat_classifier:predict'
 
-
-    # Make async calls to tf-serving
-    start_time = time.time()
-    print(image_paths)
-    responses = asyncio.run(detect_cat(image_paths))
-    print(f"It took {time.time() - start_time}s to process {len(image_paths)} images.")
-    
+    # Initialize
     cat_probabilities = dict()
-    idx = 0
     
-    for image_path in image_paths:
-        try:        
-            # Extract predictions from responses
-            predictions = responses[idx]['predictions'][0]
+    # Loop over every image
+    print('Start prediction loop.')
+    for image in images:
+        
+        # Load image
+        image_path = local_path+image
+        image_np = load_image(image_path)
 
-            try:
-                # get location of (first) cat class in detected classes and 
-                cat_class_idx = predictions['detection_classes'].index(17.0)
-                cat_probability = predictions['detection_scores'][cat_class_idx]
-            except:
-                # if not there, probability is 0 
-                cat_probability = 0.0
-            
-            # Save to dict
-            cat_probabilities[image_path] = cat_probability
+        # Create json structure for request
+        data = json.dumps({"signature_name": "serving_default", "instances": image_np.tolist()})
+        
+        # Send request
+        json_response = requests.post(url, data=data, headers=headers)
 
-            idx += 1
+        # Cat: 0; No Cat: 1
+        cat_probability = json.loads(json_response.text)['predictions'][0][0]
 
-            print('try')
-        except:
-            print(f"Image {image_path} is not behaving well.")
-            print('except')
-    
-
-    # Collect and convert responses
-
+        # Save to dict
+        cat_probabilities[image] = cat_probability
 
     # Return
     return cat_probabilities
