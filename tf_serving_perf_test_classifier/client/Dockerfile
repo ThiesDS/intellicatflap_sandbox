@@ -9,7 +9,7 @@ RUN mkdir /app/
 WORKDIR /app/
 
 # Install tensorflow 2 for rpi
-RUN pip install https://storage.googleapis.com/tensorflow/raspberrypi/tensorflow-2.3.0-cp35-none-linux_armv7l.whl
+RUN pip install https://github.com/bitsy-ai/tensorflow-arm-bin/releases/download/v2.4.0-rc2/tensorflow-2.4.0rc2-cp37-none-linux_armv7l.whl
 
 # Install rest of requierements
 COPY requirements.txt .
