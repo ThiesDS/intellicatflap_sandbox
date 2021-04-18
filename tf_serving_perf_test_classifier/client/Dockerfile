@@ -1,4 +1,4 @@
-FROM python:3.5-buster
+FROM python:3.7-buster
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Upgrade pip
@@ -9,7 +9,7 @@ RUN mkdir /app/
 WORKDIR /app/
 
 # Install tensorflow 2 for rpi
-RUN pip install https://storage.googleapis.com/tensorflow/raspberrypi/tensorflow-2.3.0rc2-cp35-none-linux_armv6l.whl
+RUN pip install https://storage.googleapis.com/tensorflow/raspberrypi/tensorflow-2.3.0-cp35-none-linux_armv7l.whl
 
 # Install rest of requierements
 COPY requirements.txt .
