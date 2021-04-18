@@ -1,4 +1,4 @@
-FROM python:3.7-buster
+FROM python:3.5-buster
 LABEL maintainer "Sven Thies <sven_thies@web.de>"
 
 # Upgrade pip
