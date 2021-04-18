@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  cat-classifier-tfserving:
+    image: tensorflow/serving:2.4.1
+    environment: 
+        - MODEL_NAME=cat_classifier
+    volumes:
+        - /Users/administrator/private/intellicatflap_sandbox/models/cat_classifier_v0_tobivscatflap/saved_model:/models/cat_classifier/1/
+    restart: always
+
+  cat-classifier-client:
+    image: catclassifierclient:v1
+    build:
+      context: ./client
+    volumes:
+        - /Users/administrator/private/intellicatflap_sandbox:/app/data

@@ -33,7 +33,7 @@ REQUEST_TYPE = 'sequential'
 
 
 # Detect objects
-cwd = os.getcwd()
+cwd = '/app/data'
 image_dir = cwd + '/sample_data/calibration_sample/'
 
 files = os.listdir(image_dir)
@@ -41,7 +41,7 @@ image_paths = [image_dir + img for img in files if img.endswith('.jpg')]
 image_paths.sort()
 
 headers = {"content-type": "application/json"}
-url = 'http://localhost:8501/v1/models/cat_classifier:predict'
+url = 'http://cat-classifier-tfserving:8501/v1/models/cat_classifier:predict'
 
 # 1. Sequentially sending requests
 if REQUEST_TYPE == 'sequential':
