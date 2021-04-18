@@ -8,7 +8,10 @@ RUN python -m pip install --upgrade pip
 RUN mkdir /app/
 WORKDIR /app/
 
-# Install python requirements
+# Install tensorflow 2 for rpi
+RUN pip install https://storage.googleapis.com/tensorflow/raspberrypi/tensorflow-2.3.0rc2-cp35-none-linux_armv6l.whl
+
+# Install rest of requierements
 COPY requirements.txt .
 RUN pip install --requirement requirements.txt
 
